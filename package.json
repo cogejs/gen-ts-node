@@ -1,6 +1,6 @@
 {
   "name": "gen-tsnp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A coge generator for building npm packages with TypeScript.",
   "main": "index.js",
   "scripts": {
