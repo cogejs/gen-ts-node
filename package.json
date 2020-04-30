@@ -1,0 +1,45 @@
+{
+  "name": "gen-tsnp",
+  "version": "0.1.0",
+  "description": "A coge generator for building npm packages with TypeScript.",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf generators/*.{js,js.map} generators/**/*.{js,js.map}",
+    "format": "prettier --write \"{src,test}/**/*.ts\" --single-quote --trailing-comma es5",
+    "prebuild": "npm run clean && tsc --version",
+    "build": "tsc --pretty",
+    "preversion": "npm test",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags",
+    "test": "jest"
+  },
+  "keywords": [
+    "coge-generator",
+    "code",
+    "generator",
+    "typescript",
+    "ts",
+    "node",
+    "package",
+    "template"
+  ],
+  "author": "towyuan@outlook.com",
+  "license": "MIT",
+  "dependencies": {
+    "coge-generator": "^0.1.9",
+    "execa": "^4.0.0",
+    "git-remote-origin-url": "^3.1.0",
+    "micromatch": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^8.1.0",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "jest": "^25.5.2",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^25.4.0",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3"
+  }
+}
