@@ -8,6 +8,17 @@ class GitTemplate extends coge_generator_1.Template {
         super(opts);
         this._cwd = opts.cwd || process.cwd();
     }
+    async init() {
+        try {
+            this._originUrl = await gitRemoteOriginUrl(this._cwd);
+        }
+        catch (e) {
+        }
+        if (this._originUrl) {
+            this.log('Current project is already git repository. Skipped.');
+            return false;
+        }
+    }
     async questions() {
         return [{
                 type: 'input',

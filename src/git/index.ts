@@ -1,6 +1,6 @@
 import * as path from "path";
 import gitRemoteOriginUrl = require("git-remote-origin-url");
-import {Template} from "coge-generator";
+import {Template, Prompter} from "coge-generator";
 
 const folder = path.basename(process.cwd()).replace(/[\/@\s\+%:\.]+?/g, '-');
 
@@ -15,10 +15,24 @@ class GitTemplate extends Template {
   _locals: Record<string, any>;
   _cwd: string;
   _pkg?: Record<string, any>;
+  _originUrl?: string;
 
   constructor(opts) {
     super(opts);
     this._cwd = opts.cwd || process.cwd();
+  }
+
+  async init() {
+    try {
+      this._originUrl = await gitRemoteOriginUrl(this._cwd);
+    } catch (e) {
+      // no-op
+    }
+
+    if (this._originUrl) {
+      this.log('Current project is already git repository. Skipped.');
+      return false;
+    }
   }
 
   async questions() {

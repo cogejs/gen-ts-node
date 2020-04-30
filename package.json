@@ -26,7 +26,7 @@
   "author": "towyuan@outlook.com",
   "license": "MIT",
   "dependencies": {
-    "coge-generator": "^0.1.9",
+    "coge-generator": "^0.1.10",
     "execa": "^4.0.0",
     "git-remote-origin-url": "^3.1.0",
     "micromatch": "^4.0.2"
