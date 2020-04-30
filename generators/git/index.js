@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 const path = require("path");
 const gitRemoteOriginUrl = require("git-remote-origin-url");
 const coge_generator_1 = require("coge-generator");
@@ -8,34 +17,38 @@ class GitTemplate extends coge_generator_1.Template {
         super(opts);
         this._cwd = opts.cwd || process.cwd();
     }
-    async init() {
-        try {
-            this._originUrl = await gitRemoteOriginUrl(this._cwd);
-        }
-        catch (e) {
-        }
-        if (this._originUrl) {
-            this.log('Current project is already git repository. Skipped.');
-            return false;
-        }
+    init() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                this._originUrl = yield gitRemoteOriginUrl(this._cwd);
+            }
+            catch (e) {
+            }
+            if (this._originUrl) {
+                this.log('Current project is already git repository. Skipped.');
+                return false;
+            }
+        });
     }
-    async questions() {
-        return [{
-                type: 'input',
-                name: 'provider',
-                message: "Git provider",
-                default: 'github.com'
-            }, {
-                type: 'input',
-                name: 'account',
-                message: "Git username or organization",
-                default: await this.user.github.username(),
-            }, {
-                type: 'input',
-                name: 'repositoryName',
-                message: "Name of the repository",
-                default: await this._detectRepositoryName(),
-            }];
+    questions() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return [{
+                    type: 'input',
+                    name: 'provider',
+                    message: "Git provider",
+                    default: 'github.com'
+                }, {
+                    type: 'input',
+                    name: 'account',
+                    message: "Git username or organization",
+                    default: yield this.user.github.username(),
+                }, {
+                    type: 'input',
+                    name: 'repositoryName',
+                    message: "Name of the repository",
+                    default: yield this._detectRepositoryName(),
+                }];
+        });
     }
     _detectRepositoryName() {
         const pkg = this._readPkg();
@@ -55,35 +68,39 @@ class GitTemplate extends coge_generator_1.Template {
             encoding: 'utf8'
         });
     }
-    async locals(locals) {
-        this._locals = locals;
-        return locals;
-    }
-    async end() {
-        let originUrl = '';
-        try {
-            originUrl = await gitRemoteOriginUrl(this._cwd);
-        }
-        catch (e) {
-        }
-        const repository = originUrl || `${this._locals.account}/${this._locals.repositoryName}`;
-        const pkg = this._readPkg();
-        if (pkg) {
-            pkg.repository = repository;
-            this._writePkg(pkg);
-        }
-        await this.spawn('git', ['init', '--quiet'], {
-            cwd: this._cwd
+    locals(locals) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this._locals = locals;
+            return locals;
         });
-        if (repository && !originUrl) {
-            let repoSSH = repository;
-            if (repository && repository.indexOf('.git') === -1) {
-                repoSSH = `git@${this._locals.provider}:${repository}.git`;
+    }
+    end() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let originUrl = '';
+            try {
+                originUrl = yield gitRemoteOriginUrl(this._cwd);
             }
-            await this.spawn('git', ['remote', 'add', 'origin', repoSSH], {
+            catch (e) {
+            }
+            const repository = originUrl || `${this._locals.account}/${this._locals.repositoryName}`;
+            const pkg = this._readPkg();
+            if (pkg) {
+                pkg.repository = repository;
+                this._writePkg(pkg);
+            }
+            yield this.spawn('git', ['init', '--quiet'], {
                 cwd: this._cwd
             });
-        }
+            if (repository && !originUrl) {
+                let repoSSH = repository;
+                if (repository && repository.indexOf('.git') === -1) {
+                    repoSSH = `git@${this._locals.provider}:${repository}.git`;
+                }
+                yield this.spawn('git', ['remote', 'add', 'origin', repoSSH], {
+                    cwd: this._cwd
+                });
+            }
+        });
     }
 }
 module.exports = GitTemplate;

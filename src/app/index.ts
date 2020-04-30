@@ -23,8 +23,14 @@ const licenses = [
 ];
 
 class AppTemplate extends Template {
+  _pkg?: Record<string, any>;
+
   constructor(opts) {
     super(opts);
+  }
+
+  async init() {
+    this._pkg = this.fs.readJsonSync('./package.json', {throws: false});
   }
 
   async questions() {
@@ -32,12 +38,12 @@ class AppTemplate extends Template {
       type: "input",
       name: "name",
       message: "Name of the module",
-      default: appname
+      default: this._pkg?.name ? this._pkg.name : appname
     }, {
       type: "input",
       name: "description",
       message: "Description of the module",
-      default: `${appname} library`
+      default: this._pkg?.description ? this._pkg.description : `${appname} library`,
     }, {
       type: "input",
       name: "owner",
@@ -54,17 +60,12 @@ class AppTemplate extends Template {
       message: "Which license do you want to use?",
       choices: licenses,
       default: 'MIT'
-    }, {
-      type: 'input',
-      name: 'licenceYear',
-      message: 'Licence year? ' + chalk.gray('(defaults to current year)'),
-      default: new Date().getFullYear().toString()
     }];
   }
 
   async locals(locals) {
     locals.author = locals.owner + (locals.email ? ` <${locals.email}>` : '');
-    locals.year = locals.licenceYear;
+    locals.year = locals.licenceYear || new Date().getFullYear().toString();
     locals.githubUsername = await this.user.github.username();
     locals.tsnpVersion = pkg.version;
     return locals;

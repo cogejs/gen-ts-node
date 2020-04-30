@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 const path = require("path");
 const mm = require("micromatch");
 const chalk = require("chalk");
@@ -22,53 +31,62 @@ class AppTemplate extends coge_generator_1.Template {
     constructor(opts) {
         super(opts);
     }
-    async questions() {
-        return [{
-                type: "input",
-                name: "name",
-                message: "Name of the module",
-                default: appname
-            }, {
-                type: "input",
-                name: "description",
-                message: "Description of the module",
-                default: `${appname} library`
-            }, {
-                type: "input",
-                name: "owner",
-                message: "Full name of package owner",
-                default: this.user.git.name()
-            }, {
-                type: "input",
-                name: "email",
-                message: "Email of the owner?" + chalk.gray(' (for setting package.json)'),
-                default: this.user.git.email
-            }, {
-                type: "list",
-                name: "license",
-                message: "Which license do you want to use?",
-                choices: licenses,
-                default: 'MIT'
-            }, {
-                type: 'input',
-                name: 'licenceYear',
-                message: 'Licence year? ' + chalk.gray('(defaults to current year)'),
-                default: new Date().getFullYear().toString()
-            }];
+    init() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this._pkg = this.fs.readJsonSync('./package.json', { throws: false });
+        });
     }
-    async locals(locals) {
-        locals.author = locals.owner + (locals.email ? ` <${locals.email}>` : '');
-        locals.year = locals.licenceYear;
-        locals.githubUsername = await this.user.github.username();
-        locals.tsnpVersion = pkg.version;
-        return locals;
+    questions() {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function* () {
+            return [{
+                    type: "input",
+                    name: "name",
+                    message: "Name of the module",
+                    default: ((_a = this._pkg) === null || _a === void 0 ? void 0 : _a.name) ? this._pkg.name : appname
+                }, {
+                    type: "input",
+                    name: "description",
+                    message: "Description of the module",
+                    default: ((_b = this._pkg) === null || _b === void 0 ? void 0 : _b.description) ? this._pkg.description : `${appname} library`,
+                }, {
+                    type: "input",
+                    name: "owner",
+                    message: "Full name of package owner",
+                    default: this.user.git.name()
+                }, {
+                    type: "input",
+                    name: "email",
+                    message: "Email of the owner?" + chalk.gray(' (for setting package.json)'),
+                    default: this.user.git.email
+                }, {
+                    type: "list",
+                    name: "license",
+                    message: "Which license do you want to use?",
+                    choices: licenses,
+                    default: 'MIT'
+                }];
+        });
     }
-    async filter(files, locals) {
-        const license = locals.license || 'MIT';
-        return mm(files, ['**', `!**/licenses${path.sep}*.*`, `**/licenses${path.sep}${license}.*`], {});
+    locals(locals) {
+        return __awaiter(this, void 0, void 0, function* () {
+            locals.author = locals.owner + (locals.email ? ` <${locals.email}>` : '');
+            locals.year = locals.licenceYear || new Date().getFullYear().toString();
+            locals.githubUsername = yield this.user.github.username();
+            locals.tsnpVersion = pkg.version;
+            return locals;
+        });
     }
-    async install(opts) {
-        return this.installDependencies(opts);
+    filter(files, locals) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const license = locals.license || 'MIT';
+            return mm(files, ['**', `!**/licenses${path.sep}*.*`, `**/licenses${path.sep}${license}.*`], {});
+        });
+    }
+    install(opts) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.installDependencies(opts);
+        });
     }
 }
 module.exports = AppTemplate;
