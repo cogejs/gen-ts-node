@@ -1,5 +1,5 @@
 {
-  "name": "gen-ts-np",
+  "name": "gen-ts-node",
   "version": "0.2.0",
   "description": "A coge generator for building npm packages with TypeScript.",
   "main": "index.js",
@@ -11,6 +11,7 @@
     "preversion": "npm test",
     "version": "npm run build",
     "postversion": "git push && git push --tags",
+    "prepublish": "npm run build",
     "test": "jest"
   },
   "keywords": [

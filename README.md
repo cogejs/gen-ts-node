@@ -1,4 +1,4 @@
-# gen-ts-np
+# gen-ts-node
 
 > A coge generator for building npm packages with TypeScript.
 
@@ -9,18 +9,18 @@
 
 Init TypeScript node package
 ```bash
-> coge ts-np
+> coge ts-node
 ```
 
 Init git repository and origin url
 ```bash
-> coge ts-np:git
+> coge ts-node:git
 ```
 
 ### Templates
 
-* `ts-np:app` generate the boilerplate.
-* `ts-np:git` git init and add repository origin url
+* `ts-node:app` generate the boilerplate.
+* `ts-node:git` git init and add repository origin url
 
 ## Licence
 
