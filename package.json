@@ -1,6 +1,6 @@
 {
   "name": "gen-ts-np",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "A coge generator for building npm packages with TypeScript.",
   "main": "index.js",
   "scripts": {
