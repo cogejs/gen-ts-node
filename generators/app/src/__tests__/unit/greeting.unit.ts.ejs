@@ -1,0 +1,12 @@
+---
+to: <%= trd %>/greeting.unit.ts
+---
+import {Greeting} from '../..';
+import {expect} from '@artlab/testlab';
+
+describe('Greeting', () => {
+  it('should greet', function () {
+    const greeting = new Greeting('Tom');
+    expect(greeting.greet('Welcome')).eql('Hello Tom, Welcome');
+  });
+});

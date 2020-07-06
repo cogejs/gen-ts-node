@@ -1,8 +1,4 @@
 ---
-to: <%- dir %>/index.ts
+to: <%= trd %>/index.ts
 ---
-export function add(a: number, b: number) {
-  console.log('index-runs');
-  return a + b;
-}
-
+export * from './greeting';

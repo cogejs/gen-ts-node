@@ -1,25 +1,14 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "@artlab/build/config/tsconfig.common.json",
   "compilerOptions": {
-    "noImplicitAny": false,
-    "declaration": false,
-    "sourceMap": false,
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "rootDir": "src",
     "outDir": "generators",
-    "preserveConstEnums": true,
-    "removeComments": true,
-    "lib": [
-      "ESNext"
-    ],
-    "target": "ES2015"
+    "rootDir": "src",
+    "composite": false,
+    "declaration": false,
+    "sourceMap": false
   },
   "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/__tests__"
+    "src"
   ]
 }

@@ -2,17 +2,22 @@
   "name": "gen-ts-node",
   "version": "0.2.1",
   "description": "A coge generator for building npm packages with TypeScript.",
-  "main": "index.js",
   "scripts": {
-    "clean": "rimraf generators/*.{js,js.map} generators/**/*.{js,js.map}",
-    "format": "prettier --write \"{src,test}/**/*.ts\" --single-quote --trailing-comma es5",
-    "prebuild": "npm run clean && tsc --version",
-    "build": "tsc --pretty",
-    "preversion": "npm test",
-    "version": "npm run build",
-    "postversion": "git push && git push --tags",
-    "prepublish": "npm run build",
-    "test": "jest"
+    "prerelease": "cross-env CI=1 npm run test && npm run lint",
+    "release": "np",
+    "build": "al-tsc",
+    "build:full": "npm ci --ignore-scripts && npm run clean && npm run build",
+    "lint": "npm run prettier:check && npm run eslint",
+    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
+    "eslint": "al-eslint --report-unused-disable-directives --cache .",
+    "eslint:fix": "npm run eslint -- --fix",
+    "prettier:cli": "al-prettier \"**/*.ts\" \"**/*.js\" \"**/*.md\"",
+    "prettier:check": "npm run prettier:cli -- --check",
+    "prettier:fix": "npm run prettier:cli -- --write",
+    "format": "npm run prettier:fix",
+    "clean": "al-clean generators/**/*.js *.tsbuildinfo",
+    "pretest": "npm run build",
+    "test": "al-mocha \"generators/__tests__/**/*.js\""
   },
   "keywords": [
     "coge-generator",
@@ -27,34 +32,22 @@
   "author": "towyuan@outlook.com",
   "license": "MIT",
   "dependencies": {
-    "coge-generator": "^0.1.12",
-    "execa": "^4.0.0",
+    "coge-generator": "^0.2.2",
+    "execa": "^4.0.2",
     "git-remote-origin-url": "^3.1.0",
     "micromatch": "^4.0.2"
   },
   "devDependencies": {
-    "@types/fs-extra": "^8.1.0",
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.13.4",
-    "jest": "^25.5.4",
-    "prettier": "^2.0.5",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^25.4.0",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.8.3"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "src/__tests__/.*\\.test\\.ts$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "@artlab/build": "^6.2.1",
+    "@artlab/eslint-config": "^8.1.1",
+    "@artlab/testlab": "^3.3.1",
+    "@types/debug": "^4.1.5",
+    "@types/lodash": "^4.14.157",
+    "@types/micromatch": "^4.0.1",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^14.0.14",
+    "cross-env": "^7.0.2",
+    "mocha": "^8.0.1",
+    "np": "^6.2.5"
   }
 }

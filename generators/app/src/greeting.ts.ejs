@@ -1,0 +1,10 @@
+---
+to: <%= trd %>/greeting.ts
+---
+export class Greeting {
+  constructor(public name: string) {}
+
+  greet(msg: string) {
+    return `Hello ${this.name}, ${msg}`;
+  }
+}

@@ -1,54 +1,56 @@
 ---
-to: package.json
+to: <%= trd %>/package.json
 ---
 {
   "name": "<%- name %>",
   "version": "0.1.0",
   "description": "<%- description %>",
-  "files": [
-    "lib"
-  ],
-  "main": "./lib/index.js",
-  "typings": "./lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "node": ">=10.16"
+  },
   "scripts": {
-    "clean": "rimraf lib",
-    "format": "prettier --write \"{src,test}/**/*.ts\" --single-quote --trailing-comma es5",
-    "prebuild": "npm run clean && tsc --version",
-    "build": "tsc --pretty",
-    "preversion": "npm test",
-    "version": "npm run build",
-    "postversion": "git push && git push --tags",
-    "test": "jest"
+    "prerelease": "cross-env CI=1 npm run build:full && npm run test && npm run lint",
+    "release": "np",
+    "build": "al-tsc",
+    "build:full": "npm ci --ignore-scripts && npm run clean && npm run build",
+    "lint": "npm run prettier:check && npm run eslint",
+    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
+    "eslint": "al-eslint --report-unused-disable-directives --cache .",
+    "eslint:fix": "npm run eslint -- --fix",
+    "prettier:cli": "al-prettier \"**/*.ts\" \"**/*.js\" \"**/*.md\"",
+    "prettier:check": "npm run prettier:cli -- --check",
+    "prettier:fix": "npm run prettier:cli -- --write",
+    "format": "npm run prettier:fix",
+    "clean": "al-clean dist <%- name %>*.tgz *.tsbuildinfo",
+    "pretest": "npm run build",
+    "test": "al-mocha \"dist/__tests__/**/*.js\"",
+    "unit": "al-mocha \"dist/__tests__/unit/**/*.js\""
   },
   "author": "<%- author %>",
   "license": "<%- license %>",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.13.4",
-    "jest": "^25.4.0",
-    "prettier": "^2.0.5",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^25.4.0",
-    "ts-node": "^8.9.1",
-    "typescript": "^3.8.3"
+    "@artlab/build": "^6.2.1",
+    "@artlab/eslint-config": "^8.1.1",
+    "@artlab/testlab": "^3.3.1",
+    "@types/debug": "^4.1.5",
+    "@types/lodash": "^4.14.157",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^14.0.14",
+    "cross-env": "^7.0.2",
+    "mocha": "^8.0.1",
+    "np": "^6.3.0"
   },
-  "engines": {
-    "node": ">=10.0.0"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "src/__tests__/.*\\.test\\.ts$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+  "keywords": [],
+  "files": [
+    "README.md",
+    "dist",
+    "src",
+    "!*/__tests__"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
