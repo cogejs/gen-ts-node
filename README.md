@@ -12,16 +12,9 @@ Init TypeScript node package
 > coge ts-node
 ```
 
-Init git repository and origin url
-
-```bash
-> coge ts-node:git
-```
-
 ### Templates
 
 - `ts-node:app` generate the boilerplate.
-- `ts-node:git` git init and add repository origin url
 
 ## Licence
 
