@@ -23,7 +23,7 @@ to: <%= trd %>/package.json
     "prettier:check": "npm run prettier:cli -- --check",
     "prettier:fix": "npm run prettier:cli -- --write",
     "format": "npm run prettier:fix",
-    "clean": "al-clean dist <%- name %>*.tgz *.tsbuildinfo",
+    "clean": "al-clean dist *.tsbuildinfo",
     "pretest": "npm run build",
     "test": "al-mocha \"dist/__tests__/**/*.js\"",
     "unit": "al-mocha \"dist/__tests__/unit/**/*.js\""
