@@ -3,10 +3,12 @@
   "version": "0.3.2",
   "description": "A coge generator for building npm packages with TypeScript.",
   "scripts": {
-    "prerelease": "cross-env CI=1 npm run test && npm run lint",
+    "prerelease": "cross-env CI=1 npm run build:full && npm run test && npm run lint",
     "release": "np",
     "build": "al-tsc",
     "build:full": "npm ci --ignore-scripts && npm run clean && npm run build",
+    "coverage": "node al-nyc report --reporter=text-summary",
+    "precoverage": "npm test",
     "lint": "npm run prettier:check && npm run eslint",
     "lint:fix": "npm run eslint:fix && npm run prettier:fix",
     "eslint": "al-eslint --report-unused-disable-directives --cache .",
@@ -15,9 +17,13 @@
     "prettier:check": "npm run prettier:cli -- --check",
     "prettier:fix": "npm run prettier:cli -- --write",
     "format": "npm run prettier:fix",
-    "clean": "al-clean generators/**/*.js *.tsbuildinfo",
-    "pretest": "npm run build",
-    "test": "al-mocha \"generators/__tests__/**/*.js\""
+    "clean": "al-clean dist *.tsbuildinfo",
+    "pretest": "npm run clean && npm run build",
+    "test": "al-nyc npm run mocha",
+    "test:ci": "al-nyc npm run mocha",
+    "posttest": "npm run lint",
+    "mocha": "al-mocha \"dist/__tests__/**/*.js\"",
+    "unit": "al-mocha \"dist/__tests__/unit/**/*.js\""
   },
   "keywords": [
     "coge-generator",
