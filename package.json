@@ -7,7 +7,7 @@
     "release": "np",
     "build": "al-tsc",
     "build:full": "npm ci --ignore-scripts && npm run clean && npm run build",
-    "coverage": "node al-nyc report --reporter=text-summary",
+    "coverage": "al-nyc report --reporter=text-summary",
     "precoverage": "npm test",
     "lint": "npm run prettier:check && npm run eslint",
     "lint:fix": "npm run eslint:fix && npm run prettier:fix",
