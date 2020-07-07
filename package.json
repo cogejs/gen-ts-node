@@ -22,8 +22,7 @@
     "test": "al-nyc npm run mocha",
     "test:ci": "al-nyc npm run mocha",
     "posttest": "npm run lint",
-    "mocha": "al-mocha \"dist/__tests__/**/*.js\"",
-    "unit": "al-mocha \"dist/__tests__/unit/**/*.js\""
+    "mocha": "al-mocha \"generators/__tests__/**/*.js\""
   },
   "keywords": [
     "coge-generator",
