@@ -28,7 +28,7 @@ class AppTemplate extends coge_generator_1.Template {
         this._pkg = this.fs.readJsonSync('./package.json', { throws: false });
     }
     async questions() {
-        var _a, _b;
+        var _a, _b, _c;
         return [
             {
                 type: 'input',
@@ -60,7 +60,7 @@ class AppTemplate extends coge_generator_1.Template {
                 name: 'license',
                 message: 'Which license do you want to use?',
                 choices: licenses,
-                default: 'MIT',
+                default: ((_c = this._pkg) === null || _c === void 0 ? void 0 : _c.license) ? this._pkg.license : 'MIT',
             },
         ];
     }
