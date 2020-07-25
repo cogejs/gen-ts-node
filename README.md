@@ -15,7 +15,3 @@ Init TypeScript node package
 ### Templates
 
 - `ts-node:app` generate the boilerplate.
-
-## Licence
-
-MIT &copy; [ty](towyuan@outlook.com>)
