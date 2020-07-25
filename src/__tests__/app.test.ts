@@ -1,5 +1,5 @@
 import {Template} from 'coge-generator';
-import {expect} from '@artlab/testlab';
+import {expect} from '@tib/testlab';
 import AppTemplate = require('../app');
 
 describe('ts-node/app', () => {
