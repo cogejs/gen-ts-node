@@ -1,6 +1,6 @@
 {
   "name": "gen-ts-node",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "A coge generator for building npm packages with TypeScript.",
   "scripts": {
     "prerelease": "cross-env CI=1 npm run test",
