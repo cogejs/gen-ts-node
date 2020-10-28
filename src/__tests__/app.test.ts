@@ -1,5 +1,5 @@
 import {Template} from 'coge-generator';
-import {expect} from '@tib/testlab';
+import {expect} from '@loopback/testlab';
 import AppTemplate = require('../app');
 
 describe('ts-node/app', () => {
