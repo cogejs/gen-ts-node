@@ -6,7 +6,8 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "allowJs": true,
-    "noEmit": true
+    "noEmit": true,
+    "esModuleInterop": true
   },
   "include": [
     "**/.eslintrc.js",
