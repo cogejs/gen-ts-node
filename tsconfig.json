@@ -6,7 +6,8 @@
     "rootDir": "src",
     "composite": false,
     "declaration": false,
-    "sourceMap": false
+    "sourceMap": false,
+    "esModuleInterop": true
   },
   "include": [
     "src"
