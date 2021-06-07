@@ -44,7 +44,7 @@
     "unit": "lb-mocha \"generators/__tests__/unit/**/*.js\""
   },
   "dependencies": {
-    "coge-generator": "^0.4.0",
+    "coge-generator": "^0.5.0",
     "execa": "^5.1.1",
     "git-remote-origin-url": "^3.1.0",
     "micromatch": "^4.0.4"
