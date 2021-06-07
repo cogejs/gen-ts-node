@@ -45,28 +45,28 @@
   },
   "dependencies": {
     "coge-generator": "^0.4.0",
-    "execa": "^5.0.0",
+    "execa": "^5.1.1",
     "git-remote-origin-url": "^3.1.0",
-    "micromatch": "^4.0.2"
+    "micromatch": "^4.0.4"
   },
   "devDependencies": {
-    "@loopback/build": "^6.2.9",
-    "@loopback/eslint-config": "^10.0.5",
-    "@loopback/testlab": "^3.2.12",
+    "@loopback/build": "^6.4.0",
+    "@loopback/eslint-config": "^10.2.0",
+    "@loopback/testlab": "^3.4.0",
     "@types/micromatch": "^4.0.1",
-    "@types/mocha": "^8.2.1",
-    "@types/node": "^14.14.33",
-    "@typescript-eslint/eslint-plugin": "^4.17.0",
-    "@typescript-eslint/parser": "^4.17.0",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^15.12.1",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
     "cross-env": "^7.0.3",
-    "eslint": "^7.21.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-eslint-plugin": "^2.3.0",
-    "eslint-plugin-mocha": "^8.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "mocha": "^8.3.2",
-    "np": "^7.4.0",
-    "prettier": "^2.2.1",
-    "typescript": "^4.2.3"
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-eslint-plugin": "^3.0.3",
+    "eslint-plugin-mocha": "^9.0.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "mocha": "^8.4.0",
+    "np": "^7.5.0",
+    "prettier": "^2.3.1",
+    "typescript": "^4.3.2"
   }
 }
