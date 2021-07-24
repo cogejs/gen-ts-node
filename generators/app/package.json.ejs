@@ -10,7 +10,7 @@ to: <%= trd %>/package.json
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "engines": {
-    "node": ">=10.16"
+    "node": ">=14"
   },
   "scripts": {
     "prerelease": "cross-env CI=1 npm run test",
@@ -38,26 +38,25 @@ to: <%= trd %>/package.json
     "unit": "lb-mocha --allow-console-logs \"dist/__tests__/unit/**/*.js\""
   },
   "dependencies": {
-    "tslib": "^2.2.0"
   },
   "devDependencies": {
-    "@loopback/build": "^6.4.0",
-    "@loopback/eslint-config": "^10.2.0",
-    "@loopback/testlab": "^3.4.0",
-    "@types/mocha": "^8.2.2",
-    "@types/node": "^15.12.1",
-    "@typescript-eslint/eslint-plugin": "^4.26.0",
-    "@typescript-eslint/parser": "^4.26.0",
+    "@loopback/build": "^7.0.0",
+    "@loopback/eslint-config": "^11.0.0",
+    "@loopback/testlab": "^3.4.2",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.4.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
     "cross-env": "^7.0.3",
-    "eslint": "^7.27.0",
+    "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-eslint-plugin": "^3.0.3",
+    "eslint-plugin-eslint-plugin": "^3.4.0",
     "eslint-plugin-mocha": "^9.0.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "mocha": "^8.4.0",
+    "mocha": "^9.0.2",
     "np": "^7.5.0",
-    "prettier": "^2.3.0",
-    "typescript": "^4.3.2"
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.5",
   },
   "keywords": [],
   "files": [
