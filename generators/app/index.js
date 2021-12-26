@@ -1,10 +1,10 @@
 "use strict";
 const tslib_1 = require("tslib");
-const path_1 = tslib_1.__importDefault(require("path"));
-const micromatch_1 = tslib_1.__importDefault(require("micromatch"));
-const chalk_1 = tslib_1.__importDefault(require("chalk"));
-const coge_generator_1 = require("coge-generator");
-const pkg = require('../../package');
+const path_1 = (0, tslib_1.__importDefault)(require("path"));
+const micromatch_1 = (0, tslib_1.__importDefault)(require("micromatch"));
+const chalk_1 = (0, tslib_1.__importDefault)(require("chalk"));
+const generator_1 = require("@coge/generator");
+const pkg = require('../../package.json');
 const AppName = path_1.default.basename(process.cwd()).replace(/[\/@\s\+%:\.]+?/g, '-');
 const licenses = [
     { name: 'Apache 2.0', value: 'Apache-2.0' },
@@ -19,7 +19,7 @@ const licenses = [
     { name: 'Unlicense', value: 'unlicense' },
     { name: 'No License (Copyrighted)', value: 'UNLICENSED' },
 ];
-class AppTemplate extends coge_generator_1.Template {
+class AppTemplate extends generator_1.Template {
     constructor(opts) {
         super(opts);
         this._cwd = opts.cwd || process.cwd();
@@ -40,7 +40,8 @@ class AppTemplate extends coge_generator_1.Template {
                 type: 'input',
                 name: 'description',
                 message: 'Description of the module',
-                default: ((_b = this._pkg) === null || _b === void 0 ? void 0 : _b.description) ? this._pkg.description
+                default: ((_b = this._pkg) === null || _b === void 0 ? void 0 : _b.description)
+                    ? this._pkg.description
                     : `${AppName} library`,
             },
             {
@@ -74,7 +75,7 @@ class AppTemplate extends coge_generator_1.Template {
     async filter(files, locals) {
         const license = locals.license || 'MIT';
         //               | +ALL | -../licenses/..                   | +../licenses/<license>.txt.ejs         |
-        return micromatch_1.default(files, [
+        return (0, micromatch_1.default)(files, [
             '**',
             `!**/licenses${path_1.default.sep}*.*`,
             `**/licenses${path_1.default.sep}${license}.*`,
@@ -90,3 +91,4 @@ class AppTemplate extends coge_generator_1.Template {
     }
 }
 module.exports = AppTemplate;
+//# sourceMappingURL=index.js.map

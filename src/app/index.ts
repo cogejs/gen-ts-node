@@ -1,9 +1,9 @@
 import path from 'path';
 import mm from 'micromatch';
 import chalk from 'chalk';
-import {InstallOptions, Template} from 'coge-generator';
+import {InstallOptions, Template} from '@coge/generator';
 
-const pkg = require('../../package');
+const pkg = require('../../package.json');
 
 const AppName = path.basename(process.cwd()).replace(/[\/@\s\+%:\.]+?/g, '-');
 
