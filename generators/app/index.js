@@ -91,4 +91,3 @@ class AppTemplate extends generator_1.Template {
     }
 }
 module.exports = AppTemplate;
-//# sourceMappingURL=index.js.map

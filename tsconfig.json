@@ -3,7 +3,10 @@
   "extends": "@nutol/build/config/tsconfig.common.json",
   "compilerOptions": {
     "outDir": "generators",
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": false,
+    "declaration": false,
+    "sourceMap": false
   },
   "include": [
     "src"
