@@ -40,9 +40,7 @@ class AppTemplate extends generator_1.Template {
                 type: 'input',
                 name: 'description',
                 message: 'Description of the module',
-                default: ((_b = this._pkg) === null || _b === void 0 ? void 0 : _b.description)
-                    ? this._pkg.description
-                    : `${AppName} library`,
+                default: ((_b = this._pkg) === null || _b === void 0 ? void 0 : _b.description) ? this._pkg.description : `${AppName} library`,
             },
             {
                 type: 'input',
@@ -75,11 +73,7 @@ class AppTemplate extends generator_1.Template {
     async filter(files, locals) {
         const license = locals.license || 'MIT';
         //               | +ALL | -../licenses/..                   | +../licenses/<license>.txt.ejs         |
-        return (0, micromatch_1.default)(files, [
-            '**',
-            `!**/licenses${path_1.default.sep}*.*`,
-            `**/licenses${path_1.default.sep}${license}.*`,
-        ]);
+        return (0, micromatch_1.default)(files, ['**', `!**/licenses${path_1.default.sep}*.*`, `**/licenses${path_1.default.sep}${license}.*`]);
     }
     async install(opts) {
         return this.installDependencies(opts);
