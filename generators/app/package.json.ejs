@@ -1,10 +1,12 @@
 ---
 to: <%= templateDir %>/package.json
 ---
+<% const pmRun = yarn ? 'yarn run' : 'npm run' %>
 {
   "name": "<%- name %>",
   "version": "0.1.0",
   "description": "<%- description %>",
+  "keywords": [],
   "author": "<%- author %>",
   "license": "<%- license %>",
   "main": "dist/index.js",
@@ -13,23 +15,23 @@ to: <%= templateDir %>/package.json
     "node": ">=14"
   },
   "scripts": {
-    "prerelease": "cross-env CI=1 npm run test",
+    "prerelease": "cross-env CI=1 <%- pmRun %> test",
     "release": "np --no-2fa",
     "build": "nb-tsc -b",
-    "build:full": "npm ci --ignore-scripts && npm run clean && npm run build",
-    "lint": "npm run prettier:check && npm run eslint",
-    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
+    "build:full": "<%- yarn ? 'yarn install' : 'npm ci'  %> --ignore-scripts && <%- pmRun %> clean && <%- pmRun %> build",
+    "lint": "<%- pmRun %> prettier:check && <%- pmRun %> eslint",
+    "lint:fix": "<%- pmRun %> eslint:fix && <%- pmRun %> prettier:fix",
     "eslint": "nb-eslint --report-unused-disable-directives --cache .",
-    "eslint:fix": "npm run eslint -- --fix",
+    "eslint:fix": "<%- pmRun %> eslint -- --fix",
     "prettier:cli": "nb-prettier \"**/*.ts\" \"**/*.js\" \"**/*.md\"",
-    "prettier:check": "npm run prettier:cli -- --check",
-    "prettier:fix": "npm run prettier:cli -- --write",
+    "prettier:check": "<%- pmRun %> prettier:cli -- --check",
+    "prettier:fix": "<%- pmRun %> prettier:cli -- --write",
     "clean": "nb-clean dist coverage .nyc_output *.tsbuildinfo",
-    "pretest": "npm run clean && npm run build",
-    "test": "npm run jest",
-    "test:ci": "jest --ci --coverage",
+    "pretest": "<%- pmRun %> clean && <%- pmRun %> build",
+    "test": "<%- pmRun %> jest",
+    "test:coverage": "jest --collectCoverage --coverageDirectory=\"./coverage\" --reporters=default --reporters=jest-junit --watchAll=false",
     "jest": "jest",
-    "posttest": "npm run lint"
+    "posttest": "<%- pmRun %> lint"
   },
   "dependencies": {
   },
@@ -54,7 +56,6 @@ to: <%= templateDir %>/package.json
     "ts-jest": "^27.1.2",
     "typescript": "^4.5.4"
   },
-  "keywords": [],
   "files": [
     "README.md",
     "dist",

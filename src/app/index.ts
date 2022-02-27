@@ -1,6 +1,7 @@
 import path from 'path';
 import mm from 'micromatch';
 import chalk from 'chalk';
+import which from 'which';
 import {InstallOptions, Template} from '@coge/generator';
 
 const pkg = require('../../package.json');
@@ -24,6 +25,7 @@ const licenses = [
 class AppTemplate extends Template {
   _cwd: string;
   _pkg?: Record<string, any>;
+  _locals?: Record<string, any>;
 
   constructor(opts: any) {
     super(opts);
@@ -35,7 +37,9 @@ class AppTemplate extends Template {
   }
 
   async questions() {
-    return [
+    const hasYarn = !!(await which('yarn'));
+
+    const q = [
       {
         type: 'input',
         name: 'name',
@@ -68,13 +72,26 @@ class AppTemplate extends Template {
         default: this._pkg?.license ? this._pkg.license : 'MIT',
       },
     ];
+
+    if (hasYarn) {
+      q.push({
+        type: 'confirm',
+        name: 'yarn',
+        message: 'Yarn is available. Do you prefer to use it by default?',
+        default: true,
+      });
+    }
+
+    return q;
   }
 
   async locals(locals: Record<string, any>) {
+    locals.yarn = locals.yarn ?? false;
     locals.author = locals.owner + (locals.email ? ` <${locals.email}>` : '');
     locals.year = locals.licenceYear || new Date().getFullYear().toString();
     locals.githubUsername = await this.user.github.username();
     locals.tsnpVersion = pkg.version;
+    this._locals = locals;
     return locals;
   }
 
@@ -85,12 +102,14 @@ class AppTemplate extends Template {
   }
 
   async install(opts?: InstallOptions) {
-    return this.installDependencies(opts);
-  }
-
-  async end() {
     await this.spawn('git', ['init', '--quiet'], {
       cwd: this._cwd,
+    });
+
+    await this.installDependencies({
+      npm: !this._locals?.yarn,
+      yarn: this._locals?.yarn,
+      ...opts,
     });
   }
 }
