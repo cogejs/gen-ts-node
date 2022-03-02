@@ -26,7 +26,7 @@ to: <%= templateDir %>/package.json
     "prettier:cli": "nb-prettier \"**/*.ts\" \"**/*.js\" \"**/*.md\"",
     "prettier:check": "<%- pmRun %> prettier:cli --check",
     "prettier:fix": "<%- pmRun %> prettier:cli --write",
-    "clean": "nb-clean dist coverage .nyc_output *.tsbuildinfo",
+    "clean": "nb-clean 'dist' 'coverage' '.nyc_output' '*.tsbuildinfo'",
     "pretest": "<%- pmRun %> clean && <%- pmRun %> build",
     "test": "<%- pmRun %> jest",
     "test:coverage": "jest --collectCoverage --coverageDirectory=\"./coverage\" --reporters=default --reporters=jest-junit --watchAll=false",
