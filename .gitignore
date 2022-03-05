@@ -22,5 +22,5 @@ coverage
 *.tgz
 .sandbox
 *.tsbuildinfo
-generators/**/__tests__
+generators/__tests__
 
