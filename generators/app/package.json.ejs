@@ -15,8 +15,8 @@ to: <%= templateDir %>/package.json
     "node": ">=14"
   },
   "scripts": {
-    "prerelease": "cross-env CI=1 <%- pmRun %> test",
-    "release": "np --no-2fa",
+    "prerelease": "<%- pmRun %> install && cross-env CI=1 <%- pmRun %> test",
+    "release": "<%- yarn ? 'yarn prerelease && ' : ''%>np --no-2fa --no-cleanup --no-tests",
     "build": "nb-tsc -b",
     "build:full": "<%- yarn ? 'yarn install' : 'npm ci'  %> --ignore-scripts && <%- pmRun %> clean && <%- pmRun %> build",
     "lint": "<%- pmRun %> prettier:check && <%- pmRun %> eslint",

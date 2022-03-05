@@ -19,8 +19,8 @@
     "url": "https://github.com/cogejs/gen-ts-node.git"
   },
   "scripts": {
-    "prerelease": "cross-env CI=1 yarn run test",
-    "release": "np --no-2fa",
+    "prerelease": "yarn install && cross-env CI=1 yarn run test",
+    "release": "yarn prerelease && np --no-2fa --no-cleanup --no-tests",
     "build": "nb-tsc -b",
     "build:full": "yarn install --ignore-scripts && yarn run clean && yarn run build",
     "lint": "yarn run prettier:check && yarn run eslint",
