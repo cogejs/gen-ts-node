@@ -21,19 +21,21 @@ cache:
 before_script:
   - node --version
   - npm --version
-  - yarn --version
 <% if (yarn) { %>
+  - yarn --version
   - yarn --no-immutable
+  - yarn build
 <% } else { %>
   - npm ci
+  - npm run build
 <% } %>
 
 test:
   script:
   <% if (yarn) { %>
-    - yarn test:coverage
+    - yarn test:ci
   <% } else { %>
-    - npm run test:coverage
+    - npm run test:ci
   <% } %>
   coverage: /Statements\s+:\s(\d+.?\d+)%/
   artifacts:
