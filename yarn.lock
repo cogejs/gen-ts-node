@@ -871,6 +871,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nutol/ts-config@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "@nutol/ts-config@npm:0.2.1"
+  checksum: bbba6a0d7d3bbde0e4c5051908b27ef263ffde1fa71f0cb08284acd681af9f2fb07ec5a8117de7d3372fde02f9387addd283be251e52eacfba8007611c037dc3
+  languageName: node
+  linkType: hard
+
 "@octokit/auth-token@npm:^2.4.4":
   version: 2.5.0
   resolution: "@octokit/auth-token@npm:2.5.0"
@@ -3365,6 +3372,7 @@ __metadata:
     "@coge/generator": ^0.7.1
     "@nutol/build": ^0.2.13
     "@nutol/eslint-config": ^0.2.8
+    "@nutol/ts-config": ^0.2.1
     "@types/fs-extra": ^11.0.1
     "@types/jest": ^29.4.0
     "@types/micromatch": ^4.0.2
