@@ -18,6 +18,9 @@
     "type": "git",
     "url": "https://github.com/cogejs/gen-ts-node.git"
   },
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "prerelease": "yarn install && cross-env CI=1 yarn run test",
     "release": "yarn prerelease && np --no-2fa --no-cleanup --no-tests",
