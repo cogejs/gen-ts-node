@@ -7,6 +7,10 @@ to: <%= templateDir %>/.prettierrc
   "printWidth": 120,
   "trailingComma": "all",
   "arrowParens": "avoid",
+  "importOrder": ["<THIRD_PARTY_MODULES>", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderParserPlugins": ["typescript", "decorators-legacy"],
   "overrides": [
     {
       "files": "**/*.md",
