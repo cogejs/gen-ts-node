@@ -16,7 +16,7 @@ to: <%= templateDir %>/package.json
   },
   "scripts": {
     "prerelease": "<%- yarn ? 'yarn' : 'npm ci'%> && cross-env CI=1 <%- pmRun %> test",
-    "release": "<%- yarn ? 'yarn prerelease && ' : ''%>np --no-2fa --yolo --no-yarn",
+    "release": "<%- yarn ? 'yarn prerelease && ' : ''%>release-it",
     "build": "nb-tsc -b",
     "build:full": "<%- yarn ? 'yarn install' : 'npm ci'%> && <%- pmRun %> clean && <%- pmRun %> build",
     "lint": "<%- pmRun %> prettier:check && <%- pmRun %> eslint",
@@ -56,8 +56,14 @@ to: <%= templateDir %>/package.json
     "jest-junit": "^16.0.0",
     "np": "^8.0.4",
     "prettier": "^2.8.8",
+    "release-it": "^15.11.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"
+  },
+  "release-it": {
+    "hooks": {
+      "after:bump": "yarn"
+    }
   },
   "files": [
     "README.md",
@@ -66,3 +72,4 @@ to: <%= templateDir %>/package.json
     "!*/__tests__"
   ]
 }
+`

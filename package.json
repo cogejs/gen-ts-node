@@ -23,7 +23,7 @@
   },
   "scripts": {
     "prerelease": "yarn install && cross-env CI=1 yarn run test",
-    "release": "yarn prerelease && np --no-2fa --no-cleanup --no-tests",
+    "release": "yarn prerelease && release-it",
     "build": "nb-tsc -b",
     "build:full": "yarn install && yarn run clean && yarn run build",
     "lint": "yarn run prettier:check && yarn run eslint",
@@ -71,8 +71,14 @@
     "jest-junit": "^16.0.0",
     "np": "^8.0.4",
     "prettier": "^3.0.0",
+    "release-it": "^15.11.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"
+  },
+  "release-it": {
+    "hooks": {
+      "after:bump": "yarn"
+    }
   },
   "packageManager": "yarn@3.4.1"
 }
