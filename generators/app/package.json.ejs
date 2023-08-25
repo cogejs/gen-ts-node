@@ -15,7 +15,7 @@ to: <%= templateDir %>/package.json
     "node": ">=16"
   },
   "scripts": {
-    "prerelease": "<%- yarn ? 'yarn' : 'npm ci'%> && cross-env CI=1 <%- pmRun %> test",
+    "prerelease": "<%- yarn ? 'yarn' : 'npm ci'%> && <%- pmRun %> build:full && cross-env CI=1 <%- pmRun %> test",
     "release": "<%- yarn ? 'yarn prerelease && ' : ''%>release-it",
     "build": "nb-tsc -b",
     "build:full": "<%- yarn ? 'yarn install' : 'npm ci'%> && <%- pmRun %> clean && <%- pmRun %> build",
