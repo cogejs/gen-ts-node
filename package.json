@@ -41,43 +41,43 @@
     "posttest": "yarn run lint"
   },
   "dependencies": {
-    "@coge/generator": "^0.7.4",
+    "@coge/generator": "^0.7.5",
     "chalk": "^4.1.2",
     "execa": "^6.1.0",
-    "fs-extra": "^11.1.1",
+    "fs-extra": "^11.2.0",
     "git-remote-origin-url": "^4.0.0",
     "micromatch": "^4.0.5",
     "which": "^4.0.0"
   },
   "devDependencies": {
-    "@nutol/build": "^0.2.15",
-    "@nutol/eslint-config": "^0.2.10",
+    "@nutol/build": "^0.2.17",
+    "@nutol/eslint-config": "^0.2.12",
     "@nutol/ts-config": "^0.2.2",
-    "@types/fs-extra": "^11.0.3",
-    "@types/jest": "^29.5.6",
-    "@types/micromatch": "^4.0.4",
-    "@types/node": "^20.8.9",
-    "@types/which": "^3.0.1",
-    "@typescript-eslint/eslint-plugin": "^6.9.0",
-    "@typescript-eslint/parser": "^6.9.0",
+    "@types/fs-extra": "^11.0.4",
+    "@types/jest": "^29.5.11",
+    "@types/micromatch": "^4.0.6",
+    "@types/node": "^20.10.6",
+    "@types/which": "^3.0.3",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
     "cross-env": "^7.0.3",
     "del-cli": "^5.1.0",
-    "eslint": "^8.52.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-eslint-plugin": "^5.1.1",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-eslint-plugin": "^5.2.1",
     "eslint-plugin-mocha": "^10.2.0",
-    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-prettier": "^5.1.2",
     "jest": "^29.7.0",
     "jest-junit": "^16.0.0",
-    "prettier": "^3.0.3",
-    "release-it": "^16.2.1",
+    "prettier": "^3.1.1",
+    "release-it": "^17.0.1",
     "ts-jest": "^29.1.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.3"
   },
   "release-it": {
     "hooks": {
       "after:bump": "yarn"
     }
   },
-  "packageManager": "yarn@4.0.1"
+  "packageManager": "yarn@4.0.2"
 }
