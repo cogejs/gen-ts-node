@@ -1,3 +1,3 @@
 module.exports = {
-  reject: ['chalk', 'execa'],
+  reject: ['chalk', 'execa', 'eslint'],
 };
