@@ -1,8 +1,10 @@
-import path from 'path';
-import mm from 'micromatch';
-import chalk from 'chalk';
-import which from 'which';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {InstallOptions, Template} from '@coge/generator';
+import chalk from 'chalk';
+import mm from 'micromatch';
+import path from 'path';
+import which from 'which';
 
 const pkg = require('../../package.json');
 
