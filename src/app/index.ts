@@ -91,7 +91,7 @@ class AppTemplate extends Template {
     locals.yarn = locals.yarn ?? false;
     locals.author = locals.owner + (locals.email ? ` <${locals.email}>` : '');
     locals.year = locals.licenceYear || new Date().getFullYear().toString();
-    locals.githubUsername = await this.user.github.username();
+    locals.githubUsername = await this.getGithubUsername();
     // locals.tsnpVersion = pkg.version;
     locals.project = {
       dependencies: {
@@ -101,6 +101,14 @@ class AppTemplate extends Template {
     };
     this._locals = locals;
     return locals;
+  }
+
+  async getGithubUsername() {
+    try {
+      return await this.user.github.username();
+    } catch (e) {
+      return '';
+    }
   }
 
   async filter(files: string[], locals: Record<string, any>) {
