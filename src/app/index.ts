@@ -92,7 +92,13 @@ class AppTemplate extends Template {
     locals.author = locals.owner + (locals.email ? ` <${locals.email}>` : '');
     locals.year = locals.licenceYear || new Date().getFullYear().toString();
     locals.githubUsername = await this.user.github.username();
-    locals.tsnpVersion = pkg.version;
+    // locals.tsnpVersion = pkg.version;
+    locals.project = {
+      dependencies: {
+        ...pkg.dependencies,
+        ...pkg.devDependencies,
+      },
+    };
     this._locals = locals;
     return locals;
   }

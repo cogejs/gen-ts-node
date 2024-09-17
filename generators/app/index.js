@@ -1,10 +1,11 @@
 "use strict";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const tslib_1 = require("tslib");
-const path_1 = tslib_1.__importDefault(require("path"));
-const micromatch_1 = tslib_1.__importDefault(require("micromatch"));
-const chalk_1 = tslib_1.__importDefault(require("chalk"));
-const which_1 = tslib_1.__importDefault(require("which"));
 const generator_1 = require("@coge/generator");
+const chalk_1 = tslib_1.__importDefault(require("chalk"));
+const micromatch_1 = tslib_1.__importDefault(require("micromatch"));
+const path_1 = tslib_1.__importDefault(require("path"));
+const which_1 = tslib_1.__importDefault(require("which"));
 const pkg = require('../../package.json');
 const AppName = path_1.default.basename(process.cwd()).replace(/[\/@\s\+%:\.]+?/g, '-');
 const licenses = [
@@ -80,7 +81,13 @@ class AppTemplate extends generator_1.Template {
         locals.author = locals.owner + (locals.email ? ` <${locals.email}>` : '');
         locals.year = locals.licenceYear || new Date().getFullYear().toString();
         locals.githubUsername = await this.user.github.username();
-        locals.tsnpVersion = pkg.version;
+        // locals.tsnpVersion = pkg.version;
+        locals.project = {
+            dependencies: {
+                ...pkg.dependencies,
+                ...pkg.devDependencies,
+            },
+        };
         this._locals = locals;
         return locals;
     }
