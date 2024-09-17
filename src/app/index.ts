@@ -95,8 +95,9 @@ class AppTemplate extends Template {
     // locals.tsnpVersion = pkg.version;
     locals.project = {
       dependencies: {
-        ...pkg.dependencies,
+        ...pkg.templateDependencies,
         ...pkg.devDependencies,
+        ...pkg.dependencies,
       },
     };
     this._locals = locals;
