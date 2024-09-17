@@ -1,6 +1,6 @@
 {
   "name": "gen-ts-node",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "A coge generator for building npm packages with TypeScript.",
   "author": "towyuan@outlook.com",
   "license": "MIT",
